@@ -1,0 +1,50 @@
+@layout.app({ title: "Edit Kursus" })
+@slot('content')
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Edit Data Kursus</h5>
+      </div>
+      <div class="card-body">
+        <form method="POST" action="{{ route('kursus.update', { id: kursus.id }) }}?_method=PUT">
+          {{ csrfField() }}
+          
+          <div class="mb-3">
+            <label for="nama_kursus" class="form-label">Nama Kursus</label>
+            <input type="text" class="form-control" id="nama_kursus" name="nama_kursus" value="{{ kursus.nama_kursus }}" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="instrukturId" class="form-label">Instruktur</label>
+            <select class="form-select" id="instrukturId" name="instrukturId" required>
+              @each(item in instruktur)
+                <option value="{{ item.id }}" {{ kursus.instrukturId === item.id ? 'selected' : '' }}>
+                  {{ item.nama }}
+                </option>
+              @endeach
+            </select>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="durasi" class="form-label">Durasi (Jam)</label>
+              <input type="number" class="form-control" id="durasi" name="durasi" value="{{ kursus.durasi }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="biaya" class="form-label">Biaya (Rp)</label>
+              <input type="number" class="form-control" id="biaya" name="biaya" value="{{ kursus.biaya }}" required>
+            </div>
+          </div>
+          
+          <div class="d-flex justify-content-between">
+            <a href="{{ route('kursus.index') }}" class="btn btn-secondary"><i class="bi bi-arrow-left me-1"></i> Kembali</a>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle me-1"></i> Perbarui Data</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endslot
+@end

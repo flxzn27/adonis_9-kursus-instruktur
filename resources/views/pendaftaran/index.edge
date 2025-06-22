@@ -1,0 +1,55 @@
+@layout.app({ title: "Data Pendaftaran Kursus" })
+@slot('content')
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0"><i class="bi bi-card-checklist me-2"></i>Data Pendaftaran</h5>
+    <a href="{{ route('pendaftaran.create') }}" class="btn btn-success btn-sm">
+      <i class="bi bi-plus-circle me-1"></i> Daftarkan Peserta
+    </a>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th>Nama Kursus</th>
+            <th>Nama Peserta</th>
+            <th>Email Peserta</th>
+            <th>Status</th>
+            <th>Tanggal Daftar</th>
+            <th width="5%">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          @each(item in pendaftaran)
+          <tr>
+            <td>{{ item.kursus.nama_kursus }}</td>
+            <td><strong>{{ item.peserta.nama }}</strong></td>
+            <td>{{ item.peserta.email }}</td>
+            <td><span class="badge bg-primary">{{ item.status }}</span></td>
+            <td>{{ item.createdAt.toFormat('dd/MM/yyyy HH:mm') }}</td>
+            <td>
+              <form 
+                method="POST" 
+                action="{{ route('pendaftaran.destroy', { id: item.id }) }}?_method=DELETE"
+                style="display: inline;"
+                onsubmit="event.preventDefault(); confirmDelete(this);">
+                {{ csrfField() }}
+                <button type="submit" class="btn btn-sm btn-outline-danger" title="Batalkan Pendaftaran">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+          @else
+          <tr>
+            <td colspan="6" class="text-center text-muted">Belum ada data pendaftaran.</td>
+          </tr>
+          @endeach
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+@endslot
+@end

@@ -1,0 +1,69 @@
+@layout.app({ title: "Dashboard" })
+@slot('content')
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Dashboard</h1>
+  </div>
+
+  <div class="alert alert-success">
+    <h4 class="alert-heading">Selamat Datang, {{ auth.user.fullName }}!</h4>
+    <p>Anda telah berhasil login ke sistem manajemen kursus. Gunakan menu navigasi di atas untuk mulai mengelola data.</p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <div class="card text-white bg-primary h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="card-title">TOTAL INSTRUKTUR</h5>
+              <h2 class="fw-bold display-4">{{ stats.instruktur }}</h2>
+            </div>
+            <i class="bi bi-person-video3 fs-1 opacity-50"></i>
+          </div>
+        </div>
+        <div class="card-footer bg-white bg-opacity-25 border-0 text-center">
+            <a href="{{ route('instruktur.index') }}" class="text-white stretched-link">
+              Lihat Detail <i class="bi bi-arrow-right-circle"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+       <div class="card text-white bg-success h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="card-title">TOTAL KURSUS</h5>
+              <h2 class="fw-bold display-4">{{ stats.kursus }}</h2>
+            </div>
+            <i class="bi bi-journal-bookmark fs-1 opacity-50"></i>
+          </div>
+        </div>
+         <div class="card-footer bg-white bg-opacity-25 border-0 text-center">
+            <a href="{{ route('kursus.index') }}" class="text-white stretched-link">
+              Lihat Detail <i class="bi bi-arrow-right-circle"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+       <div class="card text-dark bg-warning h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center p-3">
+            <div>
+              <h5 class="card-title">TOTAL PESERTA</h5>
+              <h2 class="fw-bold display-4">{{ stats.peserta }}</h2>
+            </div>
+            <i class="bi bi-people-fill fs-1 opacity-50"></i>
+          </div>
+        </div>
+         <div class="card-footer bg-dark bg-opacity-25 border-0 text-center">
+            <a href="#" class="text-dark stretched-link">
+              Lihat Detail <i class="bi bi-arrow-right-circle"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+@endslot
+@end

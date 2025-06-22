@@ -1,0 +1,43 @@
+@layout.app({ title: "Daftarkan Peserta ke Kursus" })
+@slot('content')
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0"><i class="bi bi-plus-circle me-2"></i>Form Pendaftaran Baru</h5>
+      </div>
+      <div class="card-body">
+        <form method="POST" action="{{ route('pendaftaran.store') }}">
+          {{ csrfField() }}
+          
+          <div class="mb-3">
+            <label for="kursusId" class="form-label">Pilih Kursus</label>
+            <select class="form-select" id="kursusId" name="kursusId" required>
+              <option value="" disabled selected>-- Daftar Kursus Tersedia --</option>
+              @each(item in kursus)
+                <option value="{{ item.id }}">{{ item.nama_kursus }}</option>
+              @endeach
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="pesertaId" class="form-label">Pilih Peserta</label>
+            <select class="form-select" id="pesertaId" name="pesertaId" required>
+              <option value="" disabled selected>-- Daftar Peserta --</option>
+              @each(item in peserta)
+                <option value="{{ item.id }}">{{ item.nama }} ({{ item.email }})</option>
+              @endeach
+            </select>
+          </div>
+          
+          <div class="d-flex justify-content-between">
+            <a href="{{ route('pendaftaran.index') }}" class="btn btn-secondary"><i class="bi bi-arrow-left me-1"></i> Kembali</a>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle me-1"></i> Simpan Pendaftaran</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endslot
+@end
